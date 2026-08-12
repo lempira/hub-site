@@ -1,0 +1,37 @@
+{
+  "name": "quartz-plugin-github-links",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
+    "./components": { "types": "./dist/components/index.d.ts", "import": "./dist/components/index.js" },
+    "./package.json": "./package.json"
+  },
+  "scripts": { "build": "tsup" },
+  "quartz": {
+    "name": "github-links",
+    "displayName": "GitHub Links",
+    "description": "Per-page Discuss and Source links to GitHub.",
+    "category": "component",
+    "version": "1.0.0",
+    "quartzVersion": ">=5.0.0",
+    "defaultEnabled": true,
+    "defaultOrder": 50,
+    "defaultOptions": { "repo": "", "branch": "main", "pathPrefix": "" },
+    "components": {
+      "GithubLinks": {
+        "name": "github-links",
+        "displayName": "GitHub Links",
+        "description": "Per-page Discuss and Source links.",
+        "version": "1.0.0",
+        "defaultPosition": "afterBody",
+        "defaultPriority": 20
+      }
+    }
+  },
+  "peerDependencies": { "preact": "^10.0.0" },
+  "dependencies": { "@quartz-community/types": "github:quartz-community/types" },
+  "devDependencies": { "preact": "^10.28.2", "tsup": "^8.5.0", "typescript": "^5.9.3" }
+}
