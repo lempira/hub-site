@@ -12,3 +12,9 @@ replit.nix
 .quartz/
 quartz/cli/tui/dist/
 .turbo/
+
+# Local plugin build output — only src/ and the manifest are tracked
+# (matching how plugins/github-links is committed). `quartz plugin install`
+# rebuilds dist/ from source on every machine.
+plugins/*/dist/
+plugins/*/package-lock.json

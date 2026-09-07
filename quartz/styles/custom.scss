@@ -1,3 +1,85 @@
 @use "./variables.scss" as *;
 
 // put your custom CSS here!
+
+// ---------------------------------------------------------------------------
+// Reading mode (`?read`) — see plugins/reading-mode.
+//
+// These rules live here rather than in the plugin's own `css` string because
+// custom.scss is the ONE stylesheet emitted outside `@layer quartz-base`
+// (componentResources.ts:347; every component stylesheet is wrapped by :411),
+// so it beats base.scss on cascade layer alone — no `!important`, no
+// specificity arithmetic.
+//
+// The sidebar grid TRACKS are collapsed rather than the sidebars being
+// `display: none`d. Two reasons: the sidebars keep their `grid-area`, so they
+// cannot be auto-placed into implicit tracks; and `.search-container` is a
+// `position: fixed` DESCENDANT of `.sidebar.left`, which `display: none` on the
+// ancestor would stop rendering entirely — silently breaking Cmd-K, since the
+// shortcut is bound globally and would flip `.active` on an unrenderable node.
+// `visibility: hidden` still removes the hidden chrome from the tab order and
+// the accessibility tree, and is overridable on the few descendants that must
+// stay usable.
+// ---------------------------------------------------------------------------
+:root[data-reading] {
+  .page > #quartz-body {
+    // Fixed 320px sidebar columns must be zeroed explicitly; every other track
+    // is `auto` and collapses on its own once the sidebars have no height.
+    grid-template-columns: 0 auto 0;
+    column-gap: 0;
+    row-gap: 0;
+    max-width: 46rem;
+    margin: 0 auto;
+
+    @media all and ($tablet) {
+      grid-template-columns: 0 auto;
+    }
+  }
+
+  .sidebar {
+    height: 0;
+    padding: 0;
+    visibility: hidden;
+  }
+
+  // Descendants of the hidden sidebars that must stay reachable.
+  .search-container {
+    visibility: visible;
+  }
+
+  .reading-mode-enter {
+    display: none;
+  }
+
+  .reading-mode-exit {
+    display: block;
+    visibility: visible;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 3;
+    padding: 0.35rem 0.8rem;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: var(--darkgray);
+    background: var(--light);
+    border: 1px solid var(--lightgray);
+    border-radius: 4px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--secondary);
+      border-color: var(--secondary);
+    }
+  }
+
+  // The chrome inside the centre column. The article title stays.
+  .breadcrumb-container,
+  .note-properties,
+  .content-meta,
+  .page-footer,
+  .center > hr,
+  footer {
+    display: none;
+  }
+}

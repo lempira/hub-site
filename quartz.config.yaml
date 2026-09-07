@@ -179,7 +179,18 @@ plugins:
       position: left
       priority: 30
       group: toolbar
+  # Superseded by ./plugins/reading-mode. reader-mode is a per-tab preference
+  # with no URL and no history entry, so there is nothing for the back button to
+  # return to; it also only fades the sidebars to opacity 0 without reclaiming
+  # their grid columns. Two controls that both mean "hide the chrome" but
+  # disagree about scope and how you undo them is worse than either alone.
   - source: "@quartz-community/reader-mode"
+    enabled: false
+    layout:
+      position: left
+      priority: 35
+      group: toolbar
+  - source: "./plugins/reading-mode"
     enabled: true
     layout:
       position: left
