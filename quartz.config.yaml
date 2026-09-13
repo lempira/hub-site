@@ -12,6 +12,7 @@ configuration:
     - .github
     - private
     - templates
+    - scripts
   theme:
     fontOrigin: googleFonts
     cdnCaching: true
