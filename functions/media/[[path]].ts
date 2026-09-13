@@ -1,6 +1,6 @@
 /**
  * The hub's private media. GET /media/<key> answers with the object <key> from
- * the R2 bucket bound as MEDIA (hermes-media), so
+ * the R2 bucket named media, bound as MEDIA, so
  * /media/math/k_d_tree/median_axis_split.3f9a1c07.mp4 serves the object
  * math/k_d_tree/median_axis_split.3f9a1c07.mp4.
  *
