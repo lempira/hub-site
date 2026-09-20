@@ -272,7 +272,7 @@ plugins:
   - source: "./plugins/github-links"
     enabled: true
     options:
-      repo: quivu/vault
+      repo: lempira/vault
       branch: main
       pathPrefix: ""
     layout:
